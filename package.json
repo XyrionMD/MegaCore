@@ -1,0 +1,44 @@
+{
+  "name": "megacore-ai-agent",
+  "displayName": "MegaCore",
+  "version": "1.0.0",
+  "description": "MegaCore (MC) — AI Agent Assistant. A mobile-first coding assistant powered by Google Gemini, built with Apache Cordova. Features markdown rendering, syntax highlighting, chat history, and a beautiful dark UI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "build:android": "cordova build android",
+    "build:android:release": "cordova build android --release",
+    "run:android": "cordova run android",
+    "prepare": "cordova prepare android",
+    "clean": "cordova clean android"
+  },
+  "keywords": [
+    "cordova",
+    "android",
+    "ai",
+    "gemini",
+    "chatbot",
+    "coding-assistant",
+    "markdown",
+    "syntax-highlighting",
+    "mobile-app"
+  ],
+  "author": "MegaCore Team",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/megacore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/megacore/issues"
+  },
+  "homepage": "https://github.com/your-username/megacore#readme",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "cordova-android": "^15.1.0"
+  }
+}

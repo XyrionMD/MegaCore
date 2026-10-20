@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MegaCore (MC) — AI Agent</title>
+
+  <!-- Markdown & Syntax Highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css"/>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="mc-header">
+    <div class="mc-brand">
+      <div class="mc-logo">MC</div>
+      <div class="mc-brand-text">
+        <span class="mc-name">MegaCore</span>
+        <span class="mc-tag">· MC-C / MegaCore-CodeX</span>
+      </div>
+    </div>
+    <div class="mc-header-actions">
+      <button class="mc-btn-icon" id="btnSettings" title="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <div class="mc-app">
+    <!-- Sidebar Settings -->
+    <aside class="mc-sidebar" id="sidebar">
+      <div class="mc-sidebar-header">
+        <span>⚙️ MegaCore Settings</span>
+        <button class="mc-btn-close" id="btnCloseSidebar" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="mc-settings">
+        <!-- API Key -->
+        <div class="mc-field">
+          <label class="mc-label">Gemini API Key <span class="req">*</span></label>
+          <div class="mc-input-group">
+            <input type="password" id="inpApiKey" placeholder="Enter Gemini API Key..." />
+            <button type="button" class="mc-btn-toggle-password" id="btnToggleApiKey" aria-label="Show/hide">👁️</button>
+          </div>
+          <p class="mc-hint">Get it from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a></p>
+        </div>
+
+        <!-- Model -->
+        <div class="mc-field">
+          <label class="mc-label">AI Model</label>
+          <div class="mc-input-group">
+            <input type="text" id="inpModel" placeholder="e.g. gemini-1.5-flash, gemini-1.5-pro, gemini-2.0-flash-exp..." />
+          </div>
+          <p class="mc-hint">Enter full Gemini model name. See <a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_blank">Google AI Docs</a> for available models.</p>
+        </div>
+
+        <!-- Temperature -->
+        <div class="mc-field">
+          <label class="mc-label">Temperature (Creativity)</label>
+          <div class="mc-slider-row">
+            <input type="range" id="inpTemperature" min="0" max="1" step="0.1" value="0.7" />
+            <span id="lblTemperature">0.7</span>
+          </div>
+        </div>
+
+        <!-- System Prompt -->
+        <div class="mc-field">
+          <label class="mc-label">System Prompt (AI Role)</label>
+          <div class="mc-input-group">
+            <textarea id="inpSystemPrompt" rows="6" placeholder="Example: You are MC-C, an expert coding assistant..."></textarea>
+          </div>
+          <div class="mc-prompt-actions">
+            <button type="button" class="mc-btn mc-btn-sm" id="btnExpandPrompt" title="Expand/Collapse">⛶</button>
+            <button type="button" class="mc-btn mc-btn-sm mc-btn-ghost" id="btnResetPrompt" title="Reset to default">↺</button>
+          </div>
+          <p class="mc-hint">Controls the behavior and identity of MegaCore-CodeX AI.</p>
+        </div>
+
+        <div class="mc-actions">
+          <button class="mc-btn mc-btn-primary" id="btnSaveSettings">Save Settings</button>
+          <button class="mc-btn mc-btn-ghost" id="btnResetSettings">Reset to Default</button>
+        </div>
+
+        <!-- History Management -->
+        <div class="mc-field">
+          <label class="mc-label">Chat History (Offline)</label>
+          <div class="mc-history-actions">
+            <button type="button" class="mc-btn mc-btn-sm mc-btn-ghost" id="btnExportHistory" title="Export to JSON file">📤 Export</button>
+            <button type="button" class="mc-btn mc-btn-sm mc-btn-ghost" id="btnImportHistory" title="Import from JSON file">📥 Import</button>
+            <button type="button" class="mc-btn mc-btn-sm mc-btn-danger" id="btnClearHistory" title="Delete all history">🗑️ Delete</button>
+          </div>
+          <p class="mc-hint">Max 20 conversations (auto-cut). JSON file for backup/manual restore.</p>
+          <input type="file" id="inpImportHistory" accept=".json" style="display:none" />
+        </div>
+
+        <div class="mc-status" id="settingsStatus"></div>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="mc-overlay" id="overlay"></div>
+
+    <!-- Chat Area -->
+    <main class="mc-main">
+      <!-- Status bar -->
+      <div class="mc-statusbar" id="statusbar">
+        <span class="mc-status-dot" id="statusDot"></span>
+        <span id="statusText">Ready. Enter Gemini API Key in settings.</span>
+      </div>
+
+      <!-- Messages -->
+      <div class="mc-messages" id="messages">
+        <!-- Welcome message -->
+        <div class="mc-message mc-message-ai">
+          <div class="mc-bubble">
+            <div class="mc-meta">MegaCore-CodeX <span class="mc-time"></span></div>
+            <div class="mc-content">
+              Hello! I'm <strong>MC-C (MegaCore-CodeX)</strong>, your AI Agent assistant.<br/><br/>
+              Please set your <strong>Gemini API Key</strong> in the settings panel (⚙️) before starting. I'm ready to help with coding, debugging, and code analysis with clean markdown & syntax highlighting.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <form class="mc-input-form" id="formInput">
+        <div class="mc-input-wrapper">
+          <textarea id="inpMessage" rows="1" placeholder="Type a message...  " autocomplete="off" spellcheck="false" aria-label="Type message"></textarea>
+        </div>
+        <button type="button" class="mc-btn-send" id="btnSend" aria-label="Send message">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+    </main>
+  </div>
+  <script src="cordova.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
